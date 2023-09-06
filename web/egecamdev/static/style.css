@@ -1,0 +1,92 @@
+body {
+    padding: 0;
+    margin: 10% 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 35%;
+    overflow: hidden;
+    background-color: #ffffff;
+    font-family: 'DM Serif Display', serif;
+}
+
+.nav-list {
+    padding-left: 12px;
+}
+
+.link {
+    box-sizing: border-box;
+    transition: 0.12s;
+    text-decoration: none;
+    color: #000000;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.link:hover {
+    transition: 0.06s;
+    text-transform: uppercase;
+    text-decoration-thickness: 1.75px;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 1.8px;
+    font-style: normal;
+    /* background:
+        linear-gradient(22deg, #000000, #5ce0cad5, #e43d20c7, #f17979);
+    filter: contrast(170%) brightness(100%); */
+}
+
+.header-img {
+    width: 500px;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    padding-top: 1.5%;
+    object-fit: none;
+    object-position: -40% 85%;
+}
+
+.header-title {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 48px;
+    align-self: center;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2.25px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    position: absolute;
+    width: max-content;
+
+}
+
+.title-div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    margin-right: 15%;
+    padding: 0;
+    filter: contrast(170%) brightness(100%);
+}
+
+/* ! TODO
+center nav items
+add nav to other pages
+responsive design
+
+*/
