@@ -23,6 +23,7 @@ ul {
 }
 
 .nav-list {
+    float: left;
     padding-left: 12px;
 }
 
@@ -38,7 +39,6 @@ ul {
 .link:hover {
     transition: 0.06s;
     text-transform: uppercase;
-    text-decoration-thickness: 1.75px;
     font-weight: 400;
     font-size: 24px;
     letter-spacing: 1.8px;
@@ -48,6 +48,21 @@ ul {
     filter: contrast(170%) brightness(100%); */
 }
 
+.return-link {
+    box-sizing: border-box;
+    transition: 0.12s;
+    text-decoration: none;
+    color: #000000;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.return-link:hover {
+    transition: 0.06s;
+    text-decoration: underline;
+    text-decoration-thickness: 1.75px;
+}
+
 .header-img {
     width: 500px;
     height: 200px;
@@ -55,31 +70,41 @@ ul {
     padding: 0;
     padding-top: 1.5%;
     object-fit: none;
-    object-position: -40% 85%;
+    object-position: -120% 88%;
 }
 
 .header-title {
+    transition: 0.25s;
     font-family: 'Abril Fatface', cursive;
     font-size: 48px;
     align-self: center;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2.25px;
+    letter-spacing: 3px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     color: #000000;
-    position: absolute;
     width: max-content;
 
+}
+
+.header-title:hover {
+    transition: 0.4s;
+    letter-spacing: 10px;
+    cursor: pointer;
+}
+
+.header-link {
+    text-decoration: none;
+    color: #000000;
 }
 
 .title-div {
     display: flex;
     justify-content: space-between;
     margin: 0;
-    margin-right: 15%;
     padding: 0;
     filter: contrast(170%) brightness(100%);
 }
