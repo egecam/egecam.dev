@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 10% 0;
+    background-color: whitesmoke;
 }
 
 nav {
@@ -10,6 +11,7 @@ nav {
     justify-content: space-between;
     margin: 0;
     padding: 0;
+
 }
 
 ul {
@@ -20,6 +22,7 @@ ul {
     overflow: hidden;
     background-color: #ffffff;
     font-family: 'DM Serif Display', serif;
+    background-color: transparent;
 }
 
 .nav-list {
@@ -33,7 +36,6 @@ ul {
     text-decoration: none;
     color: #000000;
     font-size: 24px;
-    font-style: italic;
 }
 
 .link:hover {
@@ -54,7 +56,6 @@ ul {
     text-decoration: none;
     color: #000000;
     font-size: 24px;
-    font-style: italic;
 }
 
 .return-link:hover {
@@ -109,9 +110,6 @@ ul {
     filter: contrast(170%) brightness(100%);
 }
 
-/* ! TODO
-center nav items
-add nav to other pages
-responsive design
+/* ! TODO: Add responsive design
 
 */
