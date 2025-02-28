@@ -101,10 +101,6 @@ A blog section with articles on technology, arts, and culture. Features include:
 
 A simple form to get in touch, with email notifications.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🙏 Acknowledgements
 
 - [Next.js](https://nextjs.org/) for the incredible framework
