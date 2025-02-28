@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# egecam.dev
 
-## Getting Started
+![Ege Çam's Personal Website](public/og-image.jpg)
 
-First, run the development server:
+A modern, minimalist personal website and blog built with Next.js, showcasing my work as a software engineer and creative technologist.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Responsive Design** - Optimized for all device sizes
+- **Dark Mode Support** - Automatic theme switching based on system preferences
+- **Project Showcase** - Highlighting my iOS and web development projects
+- **Writing Section** - Blog with tag filtering and infinite scroll
+- **Contact Form** - Easy way to get in touch
+- **SEO Optimized** - Meta tags and Open Graph images for better sharing
+- **Performance Focused** - Fast loading times and optimized assets
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js 14](https://nextjs.org/) with App Router
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Content Management**: [Contentful](https://www.contentful.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
+- **Form Handling**: [EmailJS](https://www.emailjs.com/)
 
-## Learn More
+## 🔧 Development
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js 18.x or later
+- npm or yarn
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Setup
 
-## Deploy on Vercel
+1. Clone the repository:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   git clone https://github.com/egecam/egecam.dev.git
+   cd egecam.dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env.local` file in the root directory with the following variables:
+
+   ```
+   # Contentful Configuration
+   NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your_contentful_space_id
+   NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your_contentful_access_token
+
+   # EmailJS Configuration
+   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+
+   # Feature Flags
+   NEXT_PUBLIC_SHOW_CREATIVE_GARDEN=false
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## 📝 Project Structure
+
+- `src/app/*` - Next.js app router pages and layouts
+- `src/components/*` - Reusable UI components
+- `src/lib/*` - Utility functions and API clients
+- `public/*` - Static assets like images and fonts
+
+## 📱 Features
+
+### Home Page
+
+The landing page showcases my profile, featured projects, experience, and latest writing.
+
+### Projects
+
+A curated collection of my work, including iOS apps and web development projects.
+
+### Writing
+
+A blog section with articles on technology, arts, and culture. Features include:
+
+- Tag-based filtering
+- Infinite scroll for pagination
+- Audio versions of some articles
+- Rich media embeds
+
+### Contact
+
+A simple form to get in touch, with email notifications.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- [Next.js](https://nextjs.org/) for the incredible framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS
+- [Framer Motion](https://www.framer.com/motion/) for the smooth animations
+- [Contentful](https://www.contentful.com/) for the headless CMS
+- [Vercel](https://vercel.com/) for the seamless deployment
