@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { BlogCard } from "@/components/writing/BlogCard";
 import { getBlogPosts, getAllTags, type BlogPost } from "@/lib/contentful";
 
@@ -144,7 +145,27 @@ export default function WritingPageClient() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
       >
-        <h1 className="text-4xl font-title">Writing</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl font-title">Writing</h1>
+          <Link
+            href="/rss.xml"
+            target="_blank"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 hover:bg-accent/20 text-accent text-sm transition-colors"
+            title="Subscribe to RSS feed"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-4 h-4"
+            >
+              <path d="M3.75 3a.75.75 0 0 0-.75.75v.5c0 .414.336.75.75.75H4c6.075 0 11 4.925 11 11v.25c0 .414.336.75.75.75h.5a.75.75 0 0 0 .75-.75V16C17 8.82 11.18 3 4 3h-.25Z" />
+              <path d="M3.5 8.75A.75.75 0 0 1 4.25 8H5c3.866 0 7 3.134 7 7v.75a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75V15c0-2.76-2.24-5-5-5h-.75a.75.75 0 0 1-.75-.75v-.5Z" />
+              <path d="M3 13.75a.75.75 0 0 1 .75-.75h.5a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75v-.5Z" />
+            </svg>
+            RSS
+          </Link>
+        </div>
         <p className="text-xl text-primary/80 max-w-2xl">
           Thoughts on technology, arts, and culture.
         </p>
