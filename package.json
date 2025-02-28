@@ -1,0 +1,45 @@
+{
+  "name": "egecam.dev",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.0.1",
+    "@contentful/rich-text-types": "^17.0.0",
+    "@emailjs/browser": "^4.4.1",
+    "@heroicons/react": "^2.2.0",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@types/nodemailer": "^6.4.17",
+    "contentful": "^11.4.6",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.4.2",
+    "gray-matter": "^4.0.3",
+    "next": "15.1.7",
+    "next-mdx-remote": "^5.0.0",
+    "nodemailer": "^6.10.0",
+    "react": "^19.0.0",
+    "react-confetti": "^6.2.2",
+    "react-dom": "^19.0.0",
+    "react-h5-audio-player": "^3.10.0-rc.1",
+    "react-intersection-observer": "^9.15.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.7",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
