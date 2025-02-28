@@ -11,15 +11,15 @@ const formatTagForDisplay = (tag?: string): string => {
 };
 
 type Props = {
-  params: { tag: string };
+  params: Promise<{ tag: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Ensure params is fully resolved
-  const resolvedParams = await Promise.resolve(params);
+  // Resolve params since it's a Promise
+  const resolvedParams = await params;
   const tagValue = resolvedParams.tag;
 
   const displayTag = formatTagForDisplay(tagValue);

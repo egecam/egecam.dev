@@ -1,5 +1,6 @@
 import { createClient } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
+import { BLOCKS } from '@contentful/rich-text-types';
 
 // Types for our Contentful content model
 export interface BlogPost {
@@ -85,6 +86,49 @@ const createSlug = (text: string): string => {
     .replace(/^-+|-+$/g, '');
 };
 
+// Add type definitions for ContentfulEntry and ContentfulAsset
+interface ContentfulAsset {
+  fields?: {
+    file?: {
+      url: string;
+      details: {
+        image?: {
+          width: number;
+          height: number;
+        };
+        size?: number;
+      };
+      contentType: string;
+    };
+    title?: string;
+    description?: string;
+  };
+  sys?: {
+    id: string;
+  };
+}
+
+interface ContentfulEntry {
+  fields: {
+    title?: string;
+    slug?: string;
+    description?: string;
+    body?: Document;
+    media?: ContentfulAsset[];
+    audio?: ContentfulAsset;
+    tags?: string[];
+  };
+  sys?: {
+    id?: string;
+    createdAt?: string;
+    contentType?: {
+      sys?: {
+        id?: string;
+      };
+    };
+  };
+}
+
 // Helper function to transform Contentful response to our BlogPost type
 export const transformContentfulBlogPost = (entry: ContentfulEntry): BlogPost => {
   if (!entry?.fields) {
@@ -111,12 +155,6 @@ export const transformContentfulBlogPost = (entry: ContentfulEntry): BlogPost =>
     }
 
     const file = media.fields.file;
-    // Debug log for media asset
-    console.log('Processing media asset:', {
-      url: file.url,
-      details: file.details,
-      contentType: file.contentType
-    });
 
     // Ensure URL has https protocol and remove any existing query parameters
     let imageUrl = file.url;
@@ -128,11 +166,11 @@ export const transformContentfulBlogPost = (entry: ContentfulEntry): BlogPost =>
     return {
       url: imageUrl,
       title: media.fields.title || '',
-      width: file.details?.image?.width,
-      height: file.details?.image?.height,
+      width: file.details?.image?.width || 0,
+      height: file.details?.image?.height || 0,
       contentType: file.contentType,
     };
-  }).filter(Boolean);
+  }).filter(Boolean) as BlogPost['media'];
 
   // Handle audio asset
   let audioAsset: BlogPost['audio'] = undefined;
@@ -146,16 +184,16 @@ export const transformContentfulBlogPost = (entry: ContentfulEntry): BlogPost =>
   }
 
   // Use the slug field if available, otherwise generate from title
-  const slug = fields.slug || createSlug(fields.title);
+  const slug = fields.slug || createSlug(fields.title || 'untitled');
 
   return {
     title: fields.title || 'Untitled',
     slug,
     description: fields.description || '',
-    body: fields.body,
+    body: fields.body || { nodeType: BLOCKS.DOCUMENT, data: {}, content: [] },
     media: processedMedia,
     audio: audioAsset,
-    publishedAt: entry.sys.createdAt,
+    publishedAt: entry.sys?.createdAt || new Date().toISOString(),
     tags: (fields.tags || []).map(tag => tag.trim()), // Clean up tags
   };
 };
@@ -284,32 +322,4 @@ export async function getAllTags() {
     console.error('Error fetching tags:', error);
     return [];
   }
-}
-
-// Add type definitions for ContentfulEntry and ContentfulAsset
-interface ContentfulAsset {
-  fields?: {
-    file?: {
-      url: string;
-      details: unknown;
-      contentType: string;
-    };
-    title?: string;
-    description?: string;
-  };
-  sys?: {
-    id: string;
-  };
-}
-
-interface ContentfulEntry {
-  fields: Record<string, unknown>;
-  sys?: {
-    id?: string;
-    contentType?: {
-      sys?: {
-        id?: string;
-      };
-    };
-  };
 } 

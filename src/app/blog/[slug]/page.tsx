@@ -7,24 +7,29 @@ export const dynamic = "force-dynamic";
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  if (!params?.slug) {
+  const resolvedParams = await params;
+
+  if (!resolvedParams?.slug) {
     console.error("No slug provided in params");
     notFound();
   }
 
   try {
-    const post = await getBlogPostBySlug(params.slug);
+    const post = await getBlogPostBySlug(resolvedParams.slug);
 
     if (!post) {
-      console.log(`No post found with slug: ${params.slug}`);
+      console.log(`No post found with slug: ${resolvedParams.slug}`);
       notFound();
     }
 
     return <BlogPostContent post={post} />;
   } catch (error) {
-    console.error(`Error fetching post with slug ${params.slug}:`, error);
+    console.error(
+      `Error fetching post with slug ${resolvedParams.slug}:`,
+      error
+    );
     notFound();
   }
 }

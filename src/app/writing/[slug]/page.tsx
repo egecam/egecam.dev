@@ -7,16 +7,19 @@ import { getOptimizedImageUrl } from "@/lib/contentful";
 export const dynamic = "force-dynamic";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  // Resolve params since it's a Promise
+  const resolvedParams = await params;
+
   // Fetch the post
   try {
-    const post = await getBlogPostBySlug(params.slug);
+    const post = await getBlogPostBySlug(resolvedParams.slug);
 
     if (!post) {
       return {
@@ -73,7 +76,7 @@ export async function generateMetadata(
         creator: "@egecam",
       },
       alternates: {
-        canonical: `https://egecam.dev/writing/${params.slug}`,
+        canonical: `https://egecam.dev/writing/${resolvedParams.slug}`,
       },
       // Add structured data for articles
       other: {
@@ -97,14 +100,17 @@ export async function generateMetadata(
           },
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://egecam.dev/writing/${params.slug}`,
+            "@id": `https://egecam.dev/writing/${resolvedParams.slug}`,
           },
           keywords: post.tags.join(", "),
         }),
       },
     };
   } catch (error) {
-    console.error(`Error generating metadata for slug ${params.slug}:`, error);
+    console.error(
+      `Error generating metadata for slug ${resolvedParams.slug}:`,
+      error
+    );
     return {
       title: "Error Loading Post",
       description: "There was an error loading this blog post.",
@@ -115,24 +121,30 @@ export async function generateMetadata(
 export default async function WritingPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  if (!params?.slug) {
+  // Resolve params since it's a Promise
+  const resolvedParams = await params;
+
+  if (!resolvedParams?.slug) {
     console.error("No slug provided in params");
     notFound();
   }
 
   try {
-    const post = await getBlogPostBySlug(params.slug);
+    const post = await getBlogPostBySlug(resolvedParams.slug);
 
     if (!post) {
-      console.log(`No post found with slug: ${params.slug}`);
+      console.log(`No post found with slug: ${resolvedParams.slug}`);
       notFound();
     }
 
     return <BlogPostContent post={post} />;
   } catch (error) {
-    console.error(`Error fetching post with slug ${params.slug}:`, error);
+    console.error(
+      `Error fetching post with slug ${resolvedParams.slug}:`,
+      error
+    );
     notFound();
   }
 }
