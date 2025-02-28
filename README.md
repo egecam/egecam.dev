@@ -21,7 +21,7 @@ A modern, minimalist personal website and blog built with Next.js, showcasing my
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Content Management**: [Contentful](https://www.contentful.com/)
 - **Deployment**: [Vercel](https://vercel.com/)
-- **Form Handling**: [EmailJS](https://www.emailjs.com/)
+- **Form Handling**: [Gmail API](https://developers.google.com/gmail/api) for contact form submissions
 
 ## 🔧 Development
 
@@ -54,10 +54,8 @@ A modern, minimalist personal website and blog built with Next.js, showcasing my
    NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your_contentful_space_id
    NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your_contentful_access_token
 
-   # EmailJS Configuration
-   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+   # Email Configuration
+   GMAIL_APP_PASSWORD=your_gmail_app_password
 
    # Feature Flags
    NEXT_PUBLIC_SHOW_CREATIVE_GARDEN=false
