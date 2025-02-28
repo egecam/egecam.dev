@@ -10,7 +10,7 @@ export default function MusicControl() {
 
   useEffect(() => {
     setIsPlaying(soundManager.isBackgroundMusicPlaying());
-  }, []);
+  }, [soundManager]);
 
   const handleClick = async () => {
     await soundManager.toggleBackgroundMusic();

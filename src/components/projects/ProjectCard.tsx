@@ -48,12 +48,6 @@ export default function ProjectCard({
     }
   };
 
-  // Calculate animation delay based on index
-  const getAnimationDelay = () => {
-    if (typeof index !== "number") return 0;
-    return index * 0.1; // 100ms delay per item
-  };
-
   // Get the appropriate image prefix and count for carousel
   const getCarouselConfig = () => {
     if (isOsculoProject) {

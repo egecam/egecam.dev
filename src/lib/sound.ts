@@ -188,13 +188,17 @@ class SoundManager {
 }
 
 // React hook for using sound manager
-export function useSoundManager() {
+export const useSoundManager = (): SoundManager => {
   const soundManager = useRef<SoundManager>(SoundManager.getInstance());
 
   useEffect(() => {
     soundManager.current.initialize();
+    
+    // Store reference to current sound manager for cleanup
+    const currentSoundManager = soundManager.current;
+    
     return () => {
-      soundManager.current.cleanup();
+      currentSoundManager.cleanup();
     };
   }, []);
 

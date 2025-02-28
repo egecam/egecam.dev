@@ -1,33 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import { Button } from "@/components/ui/button";
 
 const ReactConfetti = dynamic(() => import("react-confetti"), {
   ssr: false,
 });
 
-const contactLinks = [
-  {
-    platform: "Email",
-    link: "mailto:your.email@example.com",
-    label: "your.email@example.com",
-  },
-  {
-    platform: "GitHub",
-    link: "https://github.com/yourusername",
-    label: "@yourusername",
-  },
-  {
-    platform: "LinkedIn",
-    link: "https://linkedin.com/in/yourusername",
-    label: "Ege Çam",
-  },
-  // Add more contact methods
-];
-
-export default function ContactPage() {
+export default function Contact() {
+  const { toast } = useToast();
   const [isExpanded, setIsExpanded] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -45,6 +32,7 @@ export default function ContactPage() {
     width: 0,
     height: 0,
   });
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     // Update window size for confetti
@@ -151,7 +139,8 @@ export default function ContactPage() {
       >
         <h1 className="text-4xl font-title">Contact</h1>
         <p className="text-xl text-primary/80 max-w-2xl">
-          Have a question or want to work together? I'd love to hear from you.
+          Have a question or want to work together? I&apos;d love to hear from
+          you.
         </p>
       </motion.header>
 
@@ -375,6 +364,10 @@ export default function ContactPage() {
           </p>
         </motion.div>
       </motion.div>
+
+      <p className="text-sm text-gray-500 mt-2">
+        I&apos;ll get back to you as soon as possible.
+      </p>
     </div>
   );
 }

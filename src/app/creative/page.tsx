@@ -11,6 +11,7 @@ import Image from "next/image";
 import CreativeProjectCard from "@/components/creative/CreativeProjectCard";
 import ProjectDetail from "@/components/creative/ProjectDetail";
 import { useSoundManager } from "@/lib/sound";
+import { useInView } from "react-intersection-observer";
 
 type ImageSize = "sm" | "md" | "lg";
 type ImageAspect = "square" | "wide";
@@ -186,7 +187,6 @@ export default function CreativePage() {
   const soundManager = useSoundManager();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
-  const { scrollYProgress } = useScroll();
   const { scrollYProgress: heroScrollProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -217,6 +217,11 @@ export default function CreativePage() {
     setSelectedProject(null);
   };
 
+  const { ref } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <>
       {/* Full-width hero container */}
@@ -237,7 +242,7 @@ export default function CreativePage() {
 
           {/* Floating Images Layer */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {floatingImages.map((image, index) => (
+            {floatingImages.map((image) => (
               <FloatingImage key={image.src} {...image} />
             ))}
           </div>

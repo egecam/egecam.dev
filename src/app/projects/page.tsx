@@ -70,9 +70,9 @@ export default function ProjectsPage() {
     <div className="space-y-12 md:space-y-16 px-4 sm:px-6 md:px-0">
       <header className="space-y-4 md:space-y-6">
         <h1 className="text-3xl md:text-4xl font-title">Projects</h1>
-        <p className="text-base md:text-lg text-primary/80 leading-relaxed max-w-2xl">
-          A collection of projects I've worked on, each exploring different
-          technologies and solving unique challenges.
+        <p className="text-base md:text-lg text-primary/80 max-w-2xl">
+          Here&apos;s a selection of projects I&apos;ve worked on, showcasing my
+          skills and experience.
         </p>
       </header>
 

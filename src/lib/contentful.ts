@@ -85,20 +85,8 @@ const createSlug = (text: string): string => {
     .replace(/^-+|-+$/g, '');
 };
 
-// Helper function to format tag for URL
-const formatTagForUrl = (tag: string): string => {
-  return tag.toLowerCase().replace(/\s+/g, '-');
-};
-
-// Helper function to format tag for display
-const formatTagForDisplay = (tag: string): string => {
-  return tag.split('-').map(word => 
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join(' ');
-};
-
 // Helper function to transform Contentful response to our BlogPost type
-export const transformContentfulBlogPost = (entry: any): BlogPost => {
+export const transformContentfulBlogPost = (entry: ContentfulEntry): BlogPost => {
   if (!entry?.fields) {
     console.error('Invalid entry structure:', entry);
     throw new Error('Invalid Contentful entry structure');
@@ -116,7 +104,7 @@ export const transformContentfulBlogPost = (entry: any): BlogPost => {
   
   // Handle media assets
   const mediaAssets = Array.isArray(fields.media) ? fields.media : [];
-  const processedMedia = mediaAssets.map((media: any) => {
+  const processedMedia = mediaAssets.map((media: ContentfulAsset) => {
     if (!media?.fields?.file) {
       console.error('Invalid media structure:', media);
       return null;
@@ -283,4 +271,32 @@ export async function getAllTags() {
     console.error('Error fetching tags:', error);
     return [];
   }
+}
+
+// Add type definitions for ContentfulEntry and ContentfulAsset
+interface ContentfulAsset {
+  fields?: {
+    file?: {
+      url: string;
+      details: unknown;
+      contentType: string;
+    };
+    title?: string;
+    description?: string;
+  };
+  sys?: {
+    id: string;
+  };
+}
+
+interface ContentfulEntry {
+  fields: Record<string, unknown>;
+  sys?: {
+    id?: string;
+    contentType?: {
+      sys?: {
+        id?: string;
+      };
+    };
+  };
 } 

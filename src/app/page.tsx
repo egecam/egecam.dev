@@ -68,10 +68,8 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           className="text-xl text-primary/80 leading-relaxed max-w-2xl"
         >
-          Software developer crafting iOS apps and immersive experiences.
-          Passionate about building products that enhance content consumption
-          and bring structure to everyday life, blending technology with
-          thoughtful design to create seamless user experiences.
+          I&apos;m a software engineer and creative technologist passionate
+          about building innovative digital experiences.
         </motion.p>
       </motion.section>
 

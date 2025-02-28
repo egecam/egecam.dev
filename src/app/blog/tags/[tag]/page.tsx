@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { getBlogPosts, getAllTags, type BlogPost } from "@/lib/contentful";
+import { getBlogPosts, type BlogPost } from "@/lib/contentful";
 
 // Helper function to format tag for display
 const formatTagForDisplay = (tag: string): string => {
