@@ -1,16 +1,14 @@
 import { getBlogPostBySlug } from "@/lib/contentful";
-import { BlogPostContent } from "@/components/blog/BlogPostContent";
+import { BlogPostContent } from "@/components/writing/BlogPostContent";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   if (!params?.slug) {
     console.error("No slug provided in params");
     notFound();

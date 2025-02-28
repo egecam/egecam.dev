@@ -169,6 +169,8 @@ export async function getBlogPosts(options: {
 } = {}) {
   const { limit = 6, skip = 0, tag, featured } = options;
   
+  console.log("getBlogPosts called with tag:", tag, "type:", typeof tag);
+  
   const query: any = {
     content_type: 'blogPost',
     limit,
@@ -179,6 +181,7 @@ export async function getBlogPosts(options: {
 
   if (tag) {
     // Match exact tag (case-insensitive)
+    console.log("Adding tag to query:", tag);
     query['fields.tags[in]'] = tag;
   }
 
@@ -187,15 +190,25 @@ export async function getBlogPosts(options: {
   }
 
   try {
+    console.log("Sending query to Contentful:", JSON.stringify(query));
     const response = await contentfulClient.getEntries(query);
     console.log('Fetched entries:', {
       total: response.total,
       items: response.items.length,
-      includes: response.includes,
+      query: query,
     });
     
+    const posts = response.items.map(transformContentfulBlogPost);
+    
+    // Log the first few posts' tags to debug
+    if (posts.length > 0) {
+      console.log('First few posts tags:', posts.slice(0, 3).map(post => post.tags));
+    } else {
+      console.log('No posts found for the query');
+    }
+    
     return {
-      posts: response.items.map(transformContentfulBlogPost),
+      posts,
       total: response.total,
       skip: response.skip,
       limit: response.limit,

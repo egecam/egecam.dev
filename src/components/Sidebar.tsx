@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
-  { name: "Writing", href: "/blog" },
+  { name: "Writing", href: "/writing" },
   // Creative Garden is hidden in production
   ...(process.env.NEXT_PUBLIC_SHOW_CREATIVE_GARDEN === "true"
     ? [{ name: "Creative Garden", href: "/creative" }]

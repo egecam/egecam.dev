@@ -22,6 +22,26 @@ const nextConfig: NextConfig = {
     // Only run ESLint on local development, not during builds
     ignoreDuringBuilds: true,
   },
+  // Add redirects from blog to writing
+  async redirects() {
+    return [
+      {
+        source: '/blog',
+        destination: '/writing',
+        permanent: true,
+      },
+      {
+        source: '/blog/:slug',
+        destination: '/writing/:slug',
+        permanent: true,
+      },
+      {
+        source: '/blog/tags/:tag',
+        destination: '/writing/tags/:tag',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

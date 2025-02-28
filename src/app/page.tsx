@@ -169,7 +169,7 @@ export default function Home() {
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-medium">Latest Writing</h2>
           <Link
-            href="/blog"
+            href="/writing"
             className="text-sm text-accent hover:text-accent/80 transition-colors"
           >
             View all writing →
@@ -185,7 +185,7 @@ export default function Home() {
             latestPosts.map((post) => (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}`}
+                href={`/writing/${post.slug}`}
                 className="group space-y-4"
               >
                 <span className="text-sm text-primary/60">

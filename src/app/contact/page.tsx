@@ -3,18 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { useToast } from "@/components/ui/use-toast";
-import { Toaster } from "@/components/ui/toaster";
-import { Button } from "@/components/ui/button";
 
 const ReactConfetti = dynamic(() => import("react-confetti"), {
   ssr: false,
 });
 
 export default function Contact() {
-  const { toast } = useToast();
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -34,8 +29,12 @@ export default function Contact() {
   });
   const formRef = useRef<HTMLFormElement>(null);
 
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
   useEffect(() => {
-    // Update window size for confetti
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -99,8 +98,8 @@ export default function Contact() {
       if (response.ok) {
         setIsSuccess(true);
         setFormData({ email: "", subject: "", message: "" });
+        showToast("Message sent successfully!");
 
-        // Reset success state after 5 seconds
         setTimeout(() => {
           setIsSuccess(false);
           setIsExpanded(false);
@@ -110,7 +109,7 @@ export default function Contact() {
       }
     } catch (error) {
       console.error("Error sending email:", error);
-      alert(
+      showToast(
         error instanceof Error
           ? error.message
           : "Failed to send message. Please try again later."
@@ -122,6 +121,12 @@ export default function Contact() {
 
   return (
     <div className="space-y-12">
+      {toastMessage && (
+        <div className="fixed top-4 right-4 z-50 bg-accent text-white px-4 py-2 rounded-lg shadow-lg">
+          {toastMessage}
+        </div>
+      )}
+
       {isSuccess && (
         <ReactConfetti
           width={windowSize.width}
@@ -139,8 +144,7 @@ export default function Contact() {
       >
         <h1 className="text-4xl font-title">Contact</h1>
         <p className="text-xl text-primary/80 max-w-2xl">
-          Have a question or want to work together? I&apos;d love to hear from
-          you.
+          Have a story to tell? I&apos;d love to hear from you.
         </p>
       </motion.header>
 
@@ -364,10 +368,6 @@ export default function Contact() {
           </p>
         </motion.div>
       </motion.div>
-
-      <p className="text-sm text-gray-500 mt-2">
-        I&apos;ll get back to you as soon as possible.
-      </p>
     </div>
   );
 }
