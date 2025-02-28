@@ -21,6 +21,7 @@ export async function generateMetadata(
     if (!post) {
       return {
         title: "Post Not Found",
+        description: "The requested blog post could not be found.",
       };
     }
 
@@ -32,9 +33,20 @@ export async function generateMetadata(
     // Default sharing message
     const sharingDescription = `Check out "${post.title}" by Ege Çam. ${post.description}`;
 
+    // Format the date for structured data
+    const publishDate = new Date(post.publishedAt).toISOString();
+
     return {
       title: post.title,
       description: sharingDescription,
+      keywords: [
+        ...post.tags,
+        "blog",
+        "article",
+        "software development",
+        "iOS development",
+        "web development",
+      ],
       openGraph: {
         title: post.title,
         description: sharingDescription,
@@ -50,18 +62,52 @@ export async function generateMetadata(
             alt: post.title,
           },
         ],
+        siteName: "Ege Çam",
+        locale: "en_US",
       },
       twitter: {
         card: "summary_large_image",
         title: post.title,
         description: sharingDescription,
         images: [featuredImage],
+        creator: "@egecam",
+      },
+      alternates: {
+        canonical: `https://egecam.dev/writing/${params.slug}`,
+      },
+      // Add structured data for articles
+      other: {
+        "script:ld+json": JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.description,
+          image: featuredImage,
+          datePublished: publishDate,
+          dateModified: publishDate,
+          author: {
+            "@type": "Person",
+            name: "Ege Çam",
+            url: "https://egecam.dev",
+          },
+          publisher: {
+            "@type": "Person",
+            name: "Ege Çam",
+            url: "https://egecam.dev",
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://egecam.dev/writing/${params.slug}`,
+          },
+          keywords: post.tags.join(", "),
+        }),
       },
     };
   } catch (error) {
     console.error(`Error generating metadata for slug ${params.slug}:`, error);
     return {
       title: "Error Loading Post",
+      description: "There was an error loading this blog post.",
     };
   }
 }

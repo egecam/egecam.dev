@@ -1,35 +1,35 @@
 import type { Metadata } from "next";
 
-// Default sharing message for the writing section
+// Default sharing message for the projects section
 const sharingDescription =
-  "Explore thoughts on software development, iOS apps, web technologies, arts, and culture by Ege Çam. Dive into articles about Swift, SwiftUI, React, Next.js, and creative technology.";
+  "Explore innovative software projects by Ege Çam, including iOS apps built with Swift and SwiftUI, web applications using React and Next.js, and other creative technology solutions.";
 
 export const metadata: Metadata = {
-  title: "Writing",
+  title: "Projects",
   description: sharingDescription,
   keywords: [
-    "blog",
-    "articles",
-    "software development",
-    "iOS development",
-    "web development",
+    "iOS apps",
+    "mobile development",
+    "web applications",
     "Swift",
     "SwiftUI",
     "React",
     "Next.js",
-    "creative technology",
+    "portfolio",
+    "software projects",
     "indie dev",
+    "creative technology",
   ],
   openGraph: {
-    title: "Writing by Ege Çam",
+    title: "Projects by Ege Çam",
     description: sharingDescription,
-    type: "article",
+    type: "website",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Writing by Ege Çam",
+        alt: "Projects by Ege Çam",
       },
     ],
     siteName: "Ege Çam",
@@ -37,20 +37,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Writing by Ege Çam",
+    title: "Projects by Ege Çam",
     description: sharingDescription,
     images: ["/og-image.jpg"],
     creator: "@egecam",
   },
   alternates: {
-    canonical: "https://egecam.dev/writing",
-    types: {
-      "application/rss+xml": "https://egecam.dev/rss.xml",
-    },
+    canonical: "https://egecam.dev/projects",
   },
 };
 
-export default function WritingLayout({
+export default function ProjectsLayout({
   children,
 }: {
   children: React.ReactNode;
