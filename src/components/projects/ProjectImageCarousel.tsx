@@ -112,9 +112,9 @@ export default function ProjectImageCarousel({
 
               // Optimize the image URL with responsive sizes
               return getOptimizedImageUrl(fullUrl, {
-                width: 800,
-                height: 450,
-                quality: 85,
+                width: 1080,
+                height: 720,
+                quality: 100,
                 format: "webp",
                 fit: "fill",
               });

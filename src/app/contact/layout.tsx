@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Contact Ege Çam",
     description: sharingDescription,
     images: ["/og-image.jpg"],
-    creator: "@egecam",
+    creator: "@egecamdev",
   },
   alternates: {
     canonical: "https://egecam.dev/contact",

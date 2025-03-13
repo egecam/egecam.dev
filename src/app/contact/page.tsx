@@ -360,10 +360,10 @@ export default function Contact() {
           <p>
             You can also reach me at{" "}
             <a
-              href="mailto:egecam000@gmail.com"
+              href="mailto:hey@egecam.dev"
               className="text-accent hover:text-accent/80 transition-colors"
             >
-              egecam000@gmail.com
+              hey@egecam.dev
             </a>
           </p>
         </motion.div>
