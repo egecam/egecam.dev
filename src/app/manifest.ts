@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Ege Çam | Software Engineer & Creative Technologist',
+    name: 'Ege Çam',
     short_name: 'Ege Çam',
-    description: 'Personal website and blog of Ege Çam, a Software Engineer specializing in iOS and web development.',
+    description: 'Personal website and blog of Ege Çam.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

@@ -79,8 +79,8 @@ export default function ProjectsPage() {
       </header>
 
       <div>
-        {projects.map((project, index) => (
-          <ProjectCard key={project.title} {...project} index={index} />
+        {projects.map((project) => (
+          <ProjectCard key={project.title} {...project} />
         ))}
       </div>
     </div>

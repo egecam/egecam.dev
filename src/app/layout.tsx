@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Sans, Bowlby_One, EB_Garamond } from "next/font/google";
+import {
+  Inter,
+  IBM_Plex_Sans,
+  Bowlby_One,
+  EB_Garamond,
+} from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 
@@ -32,11 +37,10 @@ const ebGaramond = EB_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ege Çam | Software Engineer & Creative Technologist",
+    default: "Ege Çam",
     template: "%s | Ege Çam",
   },
-  description:
-    "Software engineer and creative technologist passionate about building innovative digital experiences with iOS, SwiftUI, React, and Next.js",
+  description: "Personal website and blog of Ege Çam.",
   keywords: [
     "Ege Çam",
     "software engineer",
@@ -72,23 +76,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://egecam.dev",
     siteName: "Ege Çam",
-    title: "Ege Çam | Software Engineer & Creative Technologist",
-    description:
-      "Software engineer and creative technologist passionate about building innovative digital experiences with iOS, SwiftUI, React, and Next.js",
+    title: "Ege Çam",
+    description: "Personal website and blog of Ege Çam.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Ege Çam - Software Engineer & Creative Technologist",
+        alt: "Ege Çam",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ege Çam | Software Engineer & Creative Technologist",
-    description:
-      "Software engineer and creative technologist passionate about building innovative digital experiences with iOS, SwiftUI, React, and Next.js",
+    title: "Ege Çam",
+    description: "Personal website and blog of Ege Çam.",
     images: ["/og-image.jpg"],
     creator: "@egecam",
     site: "@egecam",
@@ -110,12 +112,10 @@ export default function RootLayout({
       className={`${inter.variable} ${ibmPlexSans.variable} ${bowlbyOne.variable} ${ebGaramond.variable}`}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" href="/avatar.png" />
+        <link rel="apple-touch-icon" href="/avatar.png" />
       </head>
-      <body
-        className="bg-background text-foreground antialiased font-sans"
-      >
+      <body className="bg-background text-foreground antialiased font-sans">
         <div className="min-h-screen">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
             {/* Left column with sidebar */}

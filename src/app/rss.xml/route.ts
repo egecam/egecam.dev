@@ -12,7 +12,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ege Çam's Blog</title>
+    <title>Ege Çam</title>
     <link>https://egecam.dev/writing</link>
     <description>Thoughts on software development, iOS apps, web technologies, arts, and culture by Ege Çam.</description>
     <language>en-us</language>
