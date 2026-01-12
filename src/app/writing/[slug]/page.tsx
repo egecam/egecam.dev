@@ -1,7 +1,7 @@
 import { getBlogPostBySlug } from "@/lib/contentful";
 import { BlogPostContent } from "@/components/writing/BlogPostContent";
 import { notFound } from "next/navigation";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { getOptimizedImageUrl } from "@/lib/contentful";
 
 export const dynamic = "force-dynamic";
@@ -10,10 +10,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Resolve params since it's a Promise
   const resolvedParams = await params;
 

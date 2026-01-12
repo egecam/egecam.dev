@@ -16,7 +16,15 @@ class SoundManager {
   private constructor() {
     if (typeof window !== 'undefined') {
       // Create AudioContext
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audioContextCtor =
+        window.AudioContext ||
+        (window as typeof window & {
+          webkitAudioContext?: typeof AudioContext;
+        }).webkitAudioContext;
+
+      this.audioContext = audioContextCtor
+        ? new audioContextCtor()
+        : null;
 
       // Initialize sounds
       this.sounds = {

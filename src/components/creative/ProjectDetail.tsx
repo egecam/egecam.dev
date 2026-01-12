@@ -39,7 +39,7 @@ export default function ProjectDetail({
           soundManager.playClick();
           onClose();
         }}
-        className="absolute -top-16 left-0 text-primary/60 hover:text-primary transition-colors flex items-center gap-2"
+        className="absolute -top-16 left-0 text-foreground/60 hover:text-foreground transition-colors flex items-center gap-2"
         onMouseEnter={() => soundManager.playHover()}
       >
         <svg
@@ -70,9 +70,9 @@ export default function ProjectDetail({
             >
               {type}
             </span>
-            <span className="text-primary/40">{year}</span>
+            <span className="text-foreground/40">{year}</span>
           </div>
-          <h2 className="text-4xl font-title">{title}</h2>
+          <h2 className="text-4xl font-display tracking-display">{title}</h2>
         </div>
 
         {/* Main content */}
@@ -99,7 +99,7 @@ export default function ProjectDetail({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-lg text-primary/70 leading-relaxed"
+              className="text-lg text-foreground/70 leading-relaxed"
             >
               {description}
             </motion.p>
@@ -116,7 +116,7 @@ export default function ProjectDetail({
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + i * 0.1 }}
-                  className="flex items-center gap-3 text-primary/60"
+                  className="flex items-center gap-3 text-foreground/60"
                 >
                   <span style={{ color }}>&bull;</span>
                   {detail}

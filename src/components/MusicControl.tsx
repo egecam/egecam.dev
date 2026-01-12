@@ -23,7 +23,7 @@ export default function MusicControl() {
       className="fixed top-24 left-8 xl:left-16 2xl:left-24 z-50 p-3 rounded-full
         bg-background/80 backdrop-blur-sm hover:bg-background/90
         border border-accent/10 hover:border-accent/20
-        text-primary/60 hover:text-accent
+        text-foreground/60 hover:text-accent
         transition-colors duration-300"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}

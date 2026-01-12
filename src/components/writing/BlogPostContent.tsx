@@ -83,21 +83,21 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            <div className="flex items-center gap-3 text-sm text-primary/60">
+            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.14em] text-foreground/60">
               <time dateTime={post.publishedAt}>
-                {format(new Date(post.publishedAt), "MMMM d, yyyy")}
+                {format(new Date(post.publishedAt), "MMM d, yyyy")}
               </time>
               <span>•</span>
               <span>{readingTime} min read</span>
               {post.audio && (
                 <>
                   <span>•</span>
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1.5">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="h-4 w-4"
+                      className="h-3.5 w-3.5"
                     >
                       <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z" />
                       <path d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z" />
@@ -108,13 +108,15 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
               )}
             </div>
 
-            <h1 className="text-4xl font-title">{post.title}</h1>
-            <p className="text-xl text-primary/80 max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-garamond font-extrabold tracking-display text-foreground leading-tight">
+              {post.title}
+            </h1>
+            <p className="text-lg text-foreground/75 max-w-2xl leading-relaxed">
               {post.description}
             </p>
 
             {/* Author and Share Section */}
-            <div className="flex items-center justify-between pt-4 border-t border-primary/10">
+            <div className="flex items-center justify-between pt-4 border-t border-foreground/10">
               <div className="space-y-4">
                 {/* Author Info */}
                 <div className="flex items-center gap-4">
@@ -140,9 +142,9 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
                         href={`/writing/tags/${tag
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
-                        className="px-3 py-1 text-sm rounded-full bg-sage/5 hover:bg-sage/10 text-sage-dark transition-colors"
+                        className="px-3 py-1 text-xs rounded-full bg-accent/5 hover:bg-accent/10 text-accent transition-colors font-medium"
                       >
-                        #{tag}
+                        {tag}
                       </Link>
                     ))}
                   </div>
@@ -251,7 +253,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
                   <h3 className="font-medium text-lg">
                     Listen to this article
                   </h3>
-                  <p className="text-sm text-primary/60 flex items-center gap-2">
+                  <p className="text-sm text-foreground/60 flex items-center gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -383,7 +385,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:text-primary prose-p:text-primary/90 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-blockquote:border-accent prose-blockquote:bg-accent/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-primary/80 prose-strong:text-primary prose-code:text-accent prose-code:bg-accent/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none"
+          className="prose prose-lg max-w-none prose-headings:font-medium prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-blockquote:border-accent prose-blockquote:bg-accent/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-foreground/80 prose-strong:text-foreground prose-code:text-accent prose-code:bg-accent/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none"
         >
           {documentToReactComponents(post.body)}
         </motion.div>
@@ -393,7 +395,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="pt-8 border-t border-primary/10"
+          className="pt-8 border-t border-foreground/10"
         >
           <Link
             href="/writing"

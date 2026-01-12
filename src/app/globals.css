@@ -4,11 +4,11 @@
 
 @layer base {
   ::selection {
-    @apply bg-accent-light;
+    @apply bg-accent/40 text-foreground;
   }
 
   body {
-    @apply bg-background text-primary;
+    @apply bg-background text-foreground font-sans;
   }
 }
 
@@ -199,28 +199,31 @@
   }
 
   .glass-effect {
-    @apply bg-background/70 backdrop-blur-md border border-accent/5;
+    @apply bg-background/70 backdrop-blur-md border border-accent/10;
   }
-}
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --accent-color: #6366f1;
-  --accent-rgb: 99, 102, 241;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .portrait-drift {
+    animation: portrait-drift 10s ease-in-out infinite;
+    will-change: transform;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @keyframes portrait-drift {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    25% {
+      transform: translate3d(10px, -12px, 0);
+    }
+    50% {
+      transform: translate3d(-8px, 6px, 0);
+    }
+    75% {
+      transform: translate3d(12px, 10px, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
 }
 
 .bg-dots-pattern {

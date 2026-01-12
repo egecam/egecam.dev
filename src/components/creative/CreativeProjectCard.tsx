@@ -76,12 +76,12 @@ export default function CreativeProjectCard({
               >
                 {type}
               </span>
-              <span className="text-primary/40">{year}</span>
+              <span className="text-foreground/40">{year}</span>
             </div>
-            <h2 className="text-3xl font-title">{title}</h2>
+            <h2 className="text-3xl font-display tracking-display">{title}</h2>
           </div>
 
-          <p className="text-lg text-primary/70 leading-relaxed">
+          <p className="text-lg text-foreground/70 leading-relaxed">
             {description}
           </p>
 
@@ -94,7 +94,7 @@ export default function CreativeProjectCard({
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-3 text-primary/60 text-sm"
+                  className="flex items-center gap-3 text-foreground/60 text-sm"
                 >
                   <span style={{ color }}>&bull;</span>
                   {detail}

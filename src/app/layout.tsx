@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter, IBM_Plex_Sans, Bowlby_One, EB_Garamond } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 
@@ -10,17 +9,25 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const bluuNext = localFont({
-  src: [
-    {
-      path: "../fonts/BluuNext-Bold.otf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-bluu-next",
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
   display: "swap",
-  preload: true,
+  variable: "--font-ibm-plex-sans",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const bowlbyOne = Bowlby_One({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bowlby-one",
+  weight: ["400"],
+});
+
+const ebGaramond = EB_Garamond({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-eb-garamond",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -98,13 +105,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bluuNext.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${ibmPlexSans.variable} ${bowlbyOne.variable} ${ebGaramond.variable}`}
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body
-        className={`${inter.className} bg-background text-primary antialiased`}
+        className="bg-background text-foreground antialiased font-sans"
       >
         <div className="min-h-screen">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">

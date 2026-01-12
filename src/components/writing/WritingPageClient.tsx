@@ -10,18 +10,18 @@ import { getBlogPosts, getAllTags, type BlogPost } from "@/lib/contentful";
 // Add this skeleton component at the top of the file
 const BlogCardSkeleton = () => (
   <div className="space-y-4 animate-pulse">
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-primary/5" />
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-foreground/5" />
     <div className="space-y-2">
       <div className="flex items-center gap-3">
-        <div className="h-4 w-24 rounded bg-primary/5" />
+        <div className="h-4 w-24 rounded bg-foreground/5" />
       </div>
-      <div className="h-7 w-3/4 rounded bg-primary/5" />
-      <div className="h-4 w-full rounded bg-primary/5" />
-      <div className="h-4 w-2/3 rounded bg-primary/5" />
+      <div className="h-7 w-3/4 rounded bg-foreground/5" />
+      <div className="h-4 w-full rounded bg-foreground/5" />
+      <div className="h-4 w-2/3 rounded bg-foreground/5" />
     </div>
     <div className="flex gap-2 pt-2">
-      <div className="h-6 w-16 rounded-full bg-primary/5" />
-      <div className="h-6 w-20 rounded-full bg-primary/5" />
+      <div className="h-6 w-16 rounded-full bg-foreground/5" />
+      <div className="h-6 w-20 rounded-full bg-foreground/5" />
     </div>
   </div>
 );
@@ -100,13 +100,13 @@ export default function WritingPageClient() {
       <div className="space-y-24">
         {/* Header Skeleton */}
         <div className="space-y-4 animate-pulse">
-          <div className="h-12 w-32 rounded bg-primary/5" />
-          <div className="h-8 w-2/3 max-w-2xl rounded bg-primary/5" />
+          <div className="h-12 w-32 rounded bg-foreground/5" />
+          <div className="h-8 w-2/3 max-w-2xl rounded bg-foreground/5" />
         </div>
 
         {/* Featured Posts Skeleton */}
         <section className="space-y-8">
-          <div className="h-8 w-48 rounded bg-primary/5" />
+          <div className="h-8 w-48 rounded bg-foreground/5" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <BlogCardSkeleton />
             <BlogCardSkeleton />
@@ -115,17 +115,17 @@ export default function WritingPageClient() {
 
         {/* Topics Skeleton */}
         <section className="space-y-4">
-          <div className="h-8 w-32 rounded bg-primary/5" />
+          <div className="h-8 w-32 rounded bg-foreground/5" />
           <div className="flex flex-wrap gap-2">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-10 w-24 rounded-lg bg-primary/5" />
+              <div key={i} className="h-10 w-24 rounded-lg bg-foreground/5" />
             ))}
           </div>
         </section>
 
         {/* All Posts Skeleton */}
         <section className="space-y-8">
-          <div className="h-8 w-40 rounded bg-primary/5" />
+          <div className="h-8 w-40 rounded bg-foreground/5" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <BlogCardSkeleton />
             <BlogCardSkeleton />
@@ -146,7 +146,9 @@ export default function WritingPageClient() {
         className="space-y-4"
       >
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-title">Writing</h1>
+          <h1 className="text-4xl sm:text-5xl font-display tracking-display text-foreground">
+            Writing
+          </h1>
           <Link
             href="/rss.xml"
             target="_blank"
@@ -166,7 +168,7 @@ export default function WritingPageClient() {
             RSS
           </Link>
         </div>
-        <p className="text-xl text-primary/80 max-w-2xl">
+        <p className="text-subtitle text-foreground/80 max-w-2xl">
           Thoughts on technology, arts, and culture.
         </p>
       </motion.header>
@@ -174,8 +176,8 @@ export default function WritingPageClient() {
       {/* Featured Writing */}
       {featuredPosts.length > 0 && (
         <section className="space-y-8">
-          <h2 className="text-2xl font-medium">Featured Writing</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h2 className="text-2xl font-display tracking-display">Featured Writing</h2>
+          <div className="space-y-6">
             {featuredPosts.map((post, index) => (
               <BlogCard key={post.slug} post={post} priority={index < 2} />
             ))}
@@ -191,7 +193,7 @@ export default function WritingPageClient() {
           transition={{ delay: 0.2 }}
           className="space-y-4"
         >
-          <h2 className="text-2xl font-medium">Topics</h2>
+          <h2 className="text-2xl font-display tracking-display">Topics</h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <a
@@ -208,19 +210,30 @@ export default function WritingPageClient() {
 
       {/* All Writing */}
       <section className="space-y-8">
-        <h2 className="text-2xl font-medium">All Writing</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
+        {posts.length > 0 ? (
+          <>
+            <div className="space-y-6">
+              {posts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
+            </div>
 
-        {/* Load More Trigger */}
-        <div ref={ref} className="h-10 flex items-center justify-center">
-          {loading && hasMore && (
-            <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-accent"></div>
-          )}
-        </div>
+            {/* Load More Trigger */}
+            <div ref={ref} className="h-10 flex items-center justify-center">
+              {loading && hasMore && (
+                <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-accent"></div>
+              )}
+            </div>
+          </>
+        ) : (
+          !loading && (
+            <div className="rounded-3xl border border-black/10 bg-background px-8 py-16 text-center shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+              <p className="text-lg text-foreground/70">
+                No posts available yet — new writing soon.
+              </p>
+            </div>
+          )
+        )}
       </section>
     </div>
   );

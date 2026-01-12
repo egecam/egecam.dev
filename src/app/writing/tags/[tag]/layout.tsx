@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
 // Helper function to format tag for display
 const formatTagForDisplay = (tag?: string): string => {
@@ -14,10 +14,7 @@ type Props = {
   params: Promise<{ tag: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Resolve params since it's a Promise
   const resolvedParams = await params;
   const tagValue = resolvedParams.tag;

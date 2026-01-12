@@ -241,7 +241,7 @@ export default function ProjectImageCarousel({
           <button
             onClick={goToPrevious}
             disabled={isTransitioning}
-            className={`absolute left-1 md:left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/20 p-1.5 md:p-2 text-white backdrop-blur-sm transition-all hover:bg-sage/60 ${
+            className={`absolute left-1 md:left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/20 p-1.5 md:p-2 text-white backdrop-blur-sm transition-all hover:bg-highlight/60 ${
               isTransitioning ? "opacity-50 cursor-not-allowed" : ""
             }`}
             aria-label="Previous image"
@@ -262,7 +262,7 @@ export default function ProjectImageCarousel({
           <button
             onClick={goToNext}
             disabled={isTransitioning}
-            className={`absolute right-1 md:right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/20 p-1.5 md:p-2 text-white backdrop-blur-sm transition-all hover:bg-sage/60 ${
+            className={`absolute right-1 md:right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/20 p-1.5 md:p-2 text-white backdrop-blur-sm transition-all hover:bg-highlight/60 ${
               isTransitioning ? "opacity-50 cursor-not-allowed" : ""
             }`}
             aria-label="Next image"

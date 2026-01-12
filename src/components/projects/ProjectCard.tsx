@@ -11,22 +11,18 @@ export interface ProjectCardProps {
   year?: string;
   description: string;
   coverImage?: string;
-  color?: string;
   features?: string[];
   techStack: string;
   link: string;
-  index?: number;
 }
 
 export default function ProjectCard({
   title,
   description,
   coverImage,
-  color,
   features = [],
   techStack,
   link,
-  index,
 }: ProjectCardProps) {
   // Check if this is a project with carousel images
   const isOsculoProject = title === "Osculo";
@@ -75,7 +71,7 @@ export default function ProjectCard({
           onClick={hasCarouselImages ? handleCarouselClick : undefined}
         >
           {/* Title - Moved above the image */}
-          <h2 className="text-xl md:text-2xl font-medium group-hover:text-accent transition-colors mb-3 md:mb-4">
+          <h2 className="text-2xl md:text-3xl font-display tracking-display group-hover:text-accent transition-colors mb-3 md:mb-4">
             {title}
           </h2>
 
@@ -103,7 +99,7 @@ export default function ProjectCard({
 
           <div className="space-y-4 md:space-y-5">
             {/* Description */}
-            <p className="text-sm md:text-base text-primary/70 leading-relaxed">
+            <p className="text-sm md:text-base text-foreground/70 leading-relaxed">
               {description}
             </p>
 
@@ -117,9 +113,9 @@ export default function ProjectCard({
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 + i * 0.1 }}
-                    className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-primary/70"
+                    className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-foreground/70"
                   >
-                    <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-sage" />
+                    <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-highlight" />
                     <span dangerouslySetInnerHTML={{ __html: feature }} />
                   </motion.li>
                 ))}
@@ -133,7 +129,7 @@ export default function ProjectCard({
           {techStack.split(", ").map((tech) => (
             <span
               key={tech}
-              className="px-2 md:px-3 py-0.5 md:py-1 text-xs md:text-sm rounded-full bg-sage/5 hover:bg-sage/10 text-sage-dark transition-colors"
+              className="px-2 md:px-3 py-0.5 md:py-1 text-xs md:text-sm rounded-full bg-highlight/10 hover:bg-highlight/15 text-foreground transition-colors"
             >
               {tech}
             </span>

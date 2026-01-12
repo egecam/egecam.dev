@@ -1,19 +1,44 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getBlogPosts, type BlogPost } from "@/lib/contentful";
+import type { GoodreadsBook } from "./api/goodreads/route";
+import type { LetterboxdFilm } from "./api/letterboxd/route";
+import { DESIGN_TOKENS } from "./page.constants";
+import {
+  MediaCard,
+  MediaGrid,
+  HistorySection,
+  SectionHeader,
+  SubsectionLabel,
+} from "./page.components";
+import { TypewriterText } from "@/components/ui/AnimatedText";
+import { NowSection } from "@/components/ui/NowSection";
+import { Bookshelf } from "@/components/ui/Bookshelf";
+import { PosterBoard, PosterStrip } from "@/components/ui/PosterBoard";
 
 export default function Home() {
   const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentlyReading, setCurrentlyReading] = useState<GoodreadsBook[]>([]);
+  const [readBooks, setReadBooks] = useState<GoodreadsBook[]>([]);
+  const [booksLoading, setBooksLoading] = useState(true);
+  const [historyLoading, setHistoryLoading] = useState(true);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [films, setFilms] = useState<LetterboxdFilm[]>([]);
+  const [filmsLoading, setFilmsLoading] = useState(true);
+  const [filmsHistoryOpen, setFilmsHistoryOpen] = useState(false);
+  const [filmsHistoryLoading, setFilmsHistoryLoading] = useState(true);
+  const [favouriteFilms, setFavouriteFilms] = useState<LetterboxdFilm[]>([]);
+  const [favouriteFilmsLoading, setFavouriteFilmsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLatestPosts = async () => {
+    const fetchLatest = async () => {
       try {
-        const { posts } = await getBlogPosts({ limit: 2 });
+        const { posts } = await getBlogPosts({ limit: 3 });
         setLatestPosts(posts);
       } catch (error) {
         console.error("Error fetching latest posts:", error);
@@ -22,188 +47,370 @@ export default function Home() {
       }
     };
 
-    fetchLatestPosts();
+    const fetchCurrentlyReading = async () => {
+      try {
+        const response = await fetch("/api/goodreads?shelf=currently-reading");
+        const data = await response.json();
+        if (data.books) {
+          setCurrentlyReading(data.books);
+        }
+      } catch (error) {
+        console.error("Error fetching Goodreads data:", error);
+      } finally {
+        setBooksLoading(false);
+      }
+    };
+
+    const fetchReadBooks = async () => {
+      try {
+        const response = await fetch("/api/goodreads?shelf=read");
+        const data = await response.json();
+        if (data.books) {
+          setReadBooks(data.books);
+        }
+      } catch (error) {
+        console.error("Error fetching read books:", error);
+      } finally {
+        setHistoryLoading(false);
+      }
+    };
+
+    const fetchFilms = async () => {
+      try {
+        const response = await fetch("/api/letterboxd");
+        const data = await response.json();
+        if (data.films) {
+          setFilms(data.films);
+        }
+      } catch (error) {
+        console.error("Error fetching Letterboxd data:", error);
+      } finally {
+        setFilmsLoading(false);
+        setFilmsHistoryLoading(false);
+      }
+    };
+
+    const fetchFavouriteFilms = async () => {
+      try {
+        const response = await fetch("/api/letterboxd/favourites");
+        const data = await response.json();
+        if (data.films) {
+          setFavouriteFilms(data.films);
+        }
+      } catch (error) {
+        console.error("Error fetching favourite films:", error);
+      } finally {
+        setFavouriteFilmsLoading(false);
+      }
+    };
+
+    fetchLatest();
+    fetchCurrentlyReading();
+    fetchReadBooks();
+    fetchFilms();
+    fetchFavouriteFilms();
   }, []);
-
   return (
-    <div className="space-y-32">
-      {/* Hero Section */}
+    <div className={DESIGN_TOKENS.spacing.container}>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-12"
+        {...DESIGN_TOKENS.animation.section}
+        className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-black/10 bg-background-alt px-4 py-6 sm:px-6 sm:py-8 md:px-7 md:py-10 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
       >
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-title text-5xl"
-        >
-          Hey, I'm Ege
-        </motion.h1>
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-white to-sage/5 pointer-events-none" />
+        <div className="relative space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl pr-20 sm:pr-24 md:pr-0">
+          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-[3.6rem] leading-[1.1] sm:leading-[1.08] md:leading-[1.05] tracking-display text-foreground">
+            Creating calm, expressive digital experiences.
+          </h1>
+          <TypewriterText
+            text="I build mobile and web products that sound, feel, and move with intention. Currently focused on audio-first storytelling and thoughtful digital tools."
+            className="text-sm sm:text-subtitle text-foreground/80 leading-relaxed max-w-2xl"
+            speed={20}
+            delay={800}
+          />
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <Link
+              href="/projects"
+              className="rounded-full bg-accent px-4 py-2 text-xs sm:text-sm font-semibold text-background transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/70"
+            >
+              View projects
+            </Link>
+            <Link
+              href="/writing"
+              className="rounded-full border border-black/10 bg-background px-4 py-2 text-xs sm:text-sm font-semibold text-foreground transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/70"
+            >
+              Read writing
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border border-black/10 px-4 py-2 text-xs sm:text-sm font-semibold text-foreground/70 transition hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/70"
+            >
+              Say hello
+            </Link>
+          </div>
+        </div>
 
-        {/* Profile Picture Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="group relative w-full aspect-[16/9] max-w-4xl mx-auto"
-        >
-          {/* Image Container */}
-          <div className="relative h-full w-full overflow-hidden rounded-lg">
+        {/* Character Images */}
+        <div className="absolute bottom-0 right-0 pointer-events-auto opacity-60 sm:opacity-100">
+          <div className="relative w-16 h-20 sm:w-24 sm:h-32 md:w-32 md:h-40 lg:w-40 lg:h-52 cursor-pointer">
             <Image
-              src="/profile-picture.JPG"
-              alt="Ege's profile picture"
+              src="/charc1.PNG"
+              alt=""
               fill
-              className="object-cover object-center scale-105 group-hover:scale-110 transition-all duration-700 ease-out"
+              className="object-contain object-bottom-right transition-opacity duration-300 group-hover:opacity-0"
+              sizes="(max-width: 640px) 64px, (max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
               priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            />
+            <Image
+              src="/charc2.PNG"
+              alt=""
+              fill
+              className="object-contain object-bottom-right absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              sizes="(max-width: 640px) 64px, (max-width: 768px) 96px, (max-width: 1024px) 128px, 160px"
             />
           </div>
-        </motion.div>
+        </div>
+      </motion.section>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="text-xl text-primary/80 leading-relaxed max-w-2xl"
+      {/* Now Section */}
+      <NowSection />
+
+      <motion.section
+        {...DESIGN_TOKENS.animation.section}
+        className={DESIGN_TOKENS.spacing.section}
+      >
+        <SectionHeader
+          title="Music for Media"
+          rightContent={
+            <span className="text-sm text-foreground/70">music.egecam.dev</span>
+          }
+        />
+        <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Portfolio Website */}
+            <Link
+              href="https://music.egecam.dev"
+              target="_blank"
+              rel="noreferrer"
+              className="group relative block overflow-hidden rounded-3xl border border-black/10"
+            >
+              <div className="relative aspect-square w-full overflow-hidden">
+                <Image
+                  src="/music-for-media.webp"
+                  alt="Music for Media portfolio website"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.02]"
+                  priority
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/15 to-transparent" />
+              <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-center justify-between text-background">
+                <div className="flex items-center gap-2 text-sm sm:text-base font-semibold">
+                  <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(255,106,61,0.8)]" />
+                  <span>Portfolio Website</span>
+                </div>
+                <span className="text-xs sm:text-sm opacity-80">Visit →</span>
+              </div>
+            </Link>
+
+            {/* Minigame Sneak Peek */}
+            <Link
+              href="/demo"
+              className="group relative block overflow-hidden rounded-3xl border border-black/10"
+            >
+              <div className="relative aspect-square w-full bg-gradient-to-br from-[#0D3B66] via-[#1B4F72] to-[#20B2AA]">
+                {/* Animated background elements */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div
+                    className="absolute top-10 left-8 text-4xl opacity-20 animate-bounce"
+                    style={{ animationDelay: "0s" }}
+                  >
+                    🐟
+                  </div>
+                  <div
+                    className="absolute top-20 right-12 text-3xl opacity-20 animate-bounce"
+                    style={{ animationDelay: "0.5s" }}
+                  >
+                    🌴
+                  </div>
+                  <div
+                    className="absolute bottom-20 left-12 text-3xl opacity-20 animate-bounce"
+                    style={{ animationDelay: "1s" }}
+                  >
+                    🚤
+                  </div>
+                  <div
+                    className="absolute bottom-10 right-8 text-4xl opacity-20 animate-bounce"
+                    style={{ animationDelay: "1.5s" }}
+                  >
+                    🎣
+                  </div>
+                </div>
+
+                {/* Title overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                  <h4 className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-2xl">
+                    <span className="bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF6B6B] bg-clip-text text-transparent">
+                      Flip Flop
+                    </span>
+                  </h4>
+                  <p className="text-sm sm:text-base text-white/80 mb-4">
+                    A Cozy Fishing Experience
+                  </p>
+                  <p className="text-xs text-white/60">
+                    🎵 Interactive Minigame
+                  </p>
+                </div>
+
+                {/* Gradient overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
+
+                {/* Visit indicator */}
+                <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-center justify-between text-background">
+                  <div className="flex items-center gap-2 text-sm sm:text-base font-semibold">
+                    <span className="h-2 w-2 rounded-full bg-[#20B2AA] shadow-[0_0_12px_rgba(32,178,170,0.8)]" />
+                    <span>Interactive Minigame</span>
+                  </div>
+                  <span className="text-xs sm:text-sm opacity-80">Play →</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        {...DESIGN_TOKENS.animation.section}
+        className="flex flex-col gap-4 -mt-2"
+      >
+        <SectionHeader
+          title="Photography"
+          rightContent={
+            <span className="text-sm text-foreground/70">photo.egecam.dev</span>
+          }
+        />
+        <a
+          href="https://photo.egecam.dev"
+          target="_blank"
+          rel="noreferrer"
+          className="group relative block overflow-hidden rounded-3xl border border-black/10"
         >
-          I&apos;m a software engineer and creative technologist passionate
-          about building innovative digital experiences.
-        </motion.p>
-      </motion.section>
-
-      {/* Featured Projects */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="space-y-12"
-      >
-        <h2 className="text-2xl font-medium">Featured Projects</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Osculo */}
-          <Link
-            href="https://getosculo.com"
-            target="_blank"
-            className="group block p-6 rounded-xl bg-accent/5 hover:bg-accent/10 transition-all"
-          >
-            <div className="space-y-4">
-              <span className="text-sm text-accent">Featured Project</span>
-              <h3 className="text-2xl font-medium group-hover:text-accent transition-colors">
-                Osculo
-              </h3>
-              <p className="text-primary/70 leading-relaxed">
-                Transforming written content into immersive audio experiences
-                with ElevenLabs-powered voices and real-time text tracking.
-              </p>
-            </div>
-          </Link>
-
-          {/* Compulse */}
-          <Link
-            href="https://apps.apple.com/tr/app/compulse-daily-check-track/id6737450150"
-            target="_blank"
-            className="group block p-6 rounded-xl bg-sage/5 hover:bg-sage/10 transition-all"
-          >
-            <div className="space-y-4">
-              <span className="text-sm text-sage-dark">iOS App</span>
-              <h3 className="text-2xl font-medium group-hover:text-sage-dark transition-colors">
-                Compulse
-              </h3>
-              <p className="text-primary/70 leading-relaxed">
-                A daily ritual keeper designed to simplify life and bring peace
-                of mind through smart tracking and logging.
-              </p>
-            </div>
-          </Link>
-        </div>
-      </motion.section>
-
-      {/* Experience */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="space-y-12"
-      >
-        <h2 className="text-2xl font-medium">Experience</h2>
-
-        <div className="space-y-12">
-          <div className="group space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-medium group-hover:text-sage-dark transition-colors">
-                Independent iOS Developer
-              </h3>
-              <span className="text-sm text-primary/60">2023 - Present</span>
-            </div>
-            <p className="text-primary/70 leading-relaxed">
-              Building iOS apps focused on content consumption and productivity.
-              Working with SwiftUI, SwiftData, and various Apple frameworks.
-            </p>
+          <div className="relative aspect-[21/9] w-full">
+            <Image
+              src="/photos.jpg"
+              alt="Photography preview"
+              fill
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+              priority
+            />
           </div>
-
-          <div className="group space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-medium group-hover:text-sage-dark transition-colors">
-                Software Development Intern @ Türk Telekom AssisTT
-              </h3>
-              <span className="text-sm text-primary/60">Summer 2023</span>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+          <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-center justify-between text-background">
+            <div className="flex items-center gap-2 text-sm sm:text-base font-semibold">
+              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(255,106,61,0.8)]" />
+              <span>Photography</span>
             </div>
-            <p className="text-primary/70 leading-relaxed">
-              Worked on IVR (Interactive Voice Response) systems, gaining
-              experience in Java, SQL and agile methodologies.
-            </p>
+            <span className="text-xs sm:text-sm opacity-80">Visit →</span>
           </div>
-        </div>
+        </a>
       </motion.section>
 
-      {/* Latest Writing */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="space-y-12"
+        {...DESIGN_TOKENS.animation.section}
+        className={DESIGN_TOKENS.spacing.section}
       >
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-medium">Latest Writing</h2>
-          <Link
-            href="/writing"
-            className="text-sm text-accent hover:text-accent/80 transition-colors"
-          >
-            View all writing →
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <SectionHeader title="Writing" link="/writing" linkText="View all →" />
+        <div className={DESIGN_TOKENS.grid.writingGrid}>
           {loading ? (
-            <div className="col-span-2 flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-accent"></div>
-            </div>
+            Array.from({ length: 3 }).map((_, index) => (
+              <div
+                key={index}
+                className="rounded-3xl border border-black/10 bg-background px-5 py-6 shadow-[0_12px_40px_rgba(0,0,0,0.06)]"
+              >
+                <div className="h-4 w-24 overflow-hidden rounded bg-background-alt">
+                  <span className="block h-full w-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                </div>
+                <div className="mt-4 h-6 w-3/4 overflow-hidden rounded bg-background-alt">
+                  <span className="block h-full w-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                </div>
+                <div className="mt-3 h-4 w-full overflow-hidden rounded bg-background-alt">
+                  <span className="block h-full w-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                </div>
+              </div>
+            ))
           ) : latestPosts.length > 0 ? (
             latestPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/writing/${post.slug}`}
-                className="group space-y-4"
+                className={DESIGN_TOKENS.card.writingCard}
               >
-                <span className="text-sm text-primary/60">
-                  {post.tags[0] || "Article"}
-                </span>
-                <h3 className="text-xl font-medium group-hover:text-accent transition-colors">
+                <p className="text-xs uppercase tracking-[0.14em] text-foreground/60">
+                  {post.tags?.[0] || "Article"}
+                </p>
+                <h3 className="mt-2 text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-primary/70 leading-relaxed">
+                <p className="mt-2 text-foreground/75 leading-relaxed">
                   {post.description}
                 </p>
               </Link>
             ))
           ) : (
-            <div className="col-span-2 text-center py-12 text-primary/60">
-              No posts available
+            <div className="md:col-span-3 rounded-3xl border border-black/10 bg-background px-5 py-8 text-center text-foreground/70 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+              No posts available yet — new writing soon.
             </div>
           )}
+        </div>
+      </motion.section>
+
+      <motion.section
+        {...DESIGN_TOKENS.animation.section}
+        className={DESIGN_TOKENS.spacing.section}
+      >
+        <SectionHeader title="Films" />
+        <div className={DESIGN_TOKENS.spacing.subsection}>
+          <SubsectionLabel text="Favourites" />
+          <PosterBoard
+            films={favouriteFilms}
+            isLoading={favouriteFilmsLoading}
+            maxItems={4}
+          />
+        </div>
+        <div className={DESIGN_TOKENS.spacing.subsection}>
+          <SubsectionLabel text="Watch history" variant="muted" />
+          <PosterStrip films={films} isLoading={filmsLoading} maxItems={10} />
+        </div>
+        <div className="flex justify-end">
+          <a
+            href="https://letterboxd.com/egecam/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={DESIGN_TOKENS.typography.externalLink}
+          >
+            View on Letterboxd →
+          </a>
+        </div>
+      </motion.section>
+
+      <motion.section
+        {...DESIGN_TOKENS.animation.section}
+        className={DESIGN_TOKENS.spacing.section}
+      >
+        <SectionHeader title="Reading" />
+        <Bookshelf
+          currentlyReading={currentlyReading}
+          readBooks={readBooks}
+          isLoading={booksLoading || historyLoading}
+        />
+        <div className="flex justify-end">
+          <a
+            href="https://www.goodreads.com/review/list/119304187-ege-am"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={DESIGN_TOKENS.typography.externalLink}
+          >
+            View on Goodreads →
+          </a>
         </div>
       </motion.section>
     </div>

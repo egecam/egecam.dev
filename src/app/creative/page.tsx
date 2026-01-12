@@ -11,7 +11,6 @@ import Image from "next/image";
 import CreativeProjectCard from "@/components/creative/CreativeProjectCard";
 import ProjectDetail from "@/components/creative/ProjectDetail";
 import { useSoundManager } from "@/lib/sound";
-import { useInView } from "react-intersection-observer";
 
 type ImageSize = "sm" | "md" | "lg";
 type ImageAspect = "square" | "wide";
@@ -217,11 +216,6 @@ export default function CreativePage() {
     setSelectedProject(null);
   };
 
-  const { ref } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
     <>
       {/* Full-width hero container */}
@@ -255,10 +249,10 @@ export default function CreativePage() {
             className="text-center space-y-6 px-4 relative z-20"
           >
             <div className="relative">
-              <h1 className="text-6xl md:text-7xl lg:text-9xl font-title drop-shadow-[0_0_25px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_0_25px_rgba(255,255,255,0.05)]">
+              <h1 className="text-6xl md:text-7xl lg:text-9xl font-display tracking-display drop-shadow-[0_0_25px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_0_25px_rgba(255,255,255,0.05)]">
                 Creative Garden
               </h1>
-              <p className="text-xl md:text-2xl text-primary/60 max-w-3xl mx-auto mt-6">
+              <p className="text-xl md:text-2xl text-foreground/60 max-w-3xl mx-auto mt-6">
                 A space where technology meets artistry, featuring music,
                 photography, and experimental projects.
               </p>

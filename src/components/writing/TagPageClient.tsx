@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { BlogCard } from "@/components/writing/BlogCard";
 import { getBlogPosts, type BlogPost } from "@/lib/contentful";
 
@@ -115,7 +116,7 @@ export default function TagPageClient({ tag }: TagPageClientProps) {
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="flex flex-col items-center justify-center min-h-[50vh]">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
-          <p className="mt-4 text-primary/80">Loading posts...</p>
+          <p className="mt-4 text-foreground/80">Loading posts...</p>
         </div>
       </div>
     );
@@ -128,15 +129,17 @@ export default function TagPageClient({ tag }: TagPageClientProps) {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
       >
-        <h1 className="text-4xl font-title">#{displayTag}</h1>
-        <p className="text-xl text-primary/80 max-w-2xl">
+        <h1 className="text-4xl sm:text-5xl font-display tracking-display text-foreground">
+          #{displayTag}
+        </h1>
+        <p className="text-subtitle text-foreground/80 max-w-2xl">
           Explore articles tagged with #{displayTag}
         </p>
       </motion.header>
 
       {posts.length > 0 ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-6">
             {posts.map((post, index) => (
               <BlogCard key={post.slug} post={post} priority={index < 6} />
             ))}
@@ -153,7 +156,7 @@ export default function TagPageClient({ tag }: TagPageClientProps) {
         </>
       ) : (
         <div className="text-center py-16">
-          <p className="text-lg text-primary/60">
+          <p className="text-lg text-foreground/60">
             No posts found for this tag.
           </p>
         </div>
@@ -165,7 +168,7 @@ export default function TagPageClient({ tag }: TagPageClientProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <a
+          <Link
             href="/writing"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
           >
@@ -182,7 +185,7 @@ export default function TagPageClient({ tag }: TagPageClientProps) {
               />
             </svg>
             Back to all writing
-          </a>
+          </Link>
         </motion.div>
       </div>
     </div>

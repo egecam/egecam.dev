@@ -15,6 +15,18 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'assets.ctfassets.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.gr-assets.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.gr-assets.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'a.ltrbxd.com',
+      },
     ],
   },
   // Disable ESLint during build to prevent build failures

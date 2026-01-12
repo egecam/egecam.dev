@@ -209,7 +209,7 @@ export async function getBlogPosts(options: {
   
   console.log("getBlogPosts called with tag:", tag, "type:", typeof tag);
   
-  const query: any = {
+  const query: Record<string, unknown> = {
     content_type: 'blogPost',
     limit,
     skip,

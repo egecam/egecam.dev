@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 
@@ -27,7 +27,6 @@ export default function Contact() {
     width: 0,
     height: 0,
   });
-  const formRef = useRef<HTMLFormElement>(null);
 
   const showToast = (message: string) => {
     setToastMessage(message);
@@ -142,8 +141,10 @@ export default function Contact() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
       >
-        <h1 className="text-4xl font-title">Contact</h1>
-        <p className="text-xl text-primary/80 max-w-2xl">
+        <h1 className="text-4xl sm:text-5xl font-display tracking-display text-foreground">
+          Contact
+        </h1>
+        <p className="text-subtitle text-foreground/80 max-w-2xl">
           Have a story to tell? I&apos;d love to hear from you.
         </p>
       </motion.header>
@@ -175,7 +176,7 @@ export default function Contact() {
                 }
                 className={`
                   w-full bg-transparent text-lg 
-                  placeholder:text-primary/40 focus:outline-none
+                  placeholder:text-foreground/40 focus:outline-none text-foreground
                   ${errors.email ? "text-red-500" : ""}
                 `}
               />
@@ -221,7 +222,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="subject"
-                      className="block text-sm text-primary/60"
+                      className="block text-sm text-foreground/60"
                     >
                       Subject
                     </label>
@@ -254,7 +255,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="message"
-                      className="block text-sm text-primary/60"
+                      className="block text-sm text-foreground/60"
                     >
                       Message
                     </label>
@@ -355,7 +356,7 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mt-8 text-center text-primary/60"
+          className="mt-8 text-center text-foreground/60"
         >
           <p>
             You can also reach me at{" "}

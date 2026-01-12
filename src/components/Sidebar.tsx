@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { usePathname } from "next/navigation";
 
@@ -22,13 +23,41 @@ function Sidebar() {
   const y = useTransform(scrollYProgress, [0, 0.1], [0, 10]);
 
   const isCreativePage = pathname === "/creative";
+  const isHomePage = pathname === "/";
+  const [homeOpacity, setHomeOpacity] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    if (!isHomePage) {
+      setHomeOpacity(1);
+      return;
+    }
+
+    const handleScroll = () => {
+      const next = 1 - window.scrollY / 500;
+      setHomeOpacity(Math.max(0.55, Math.min(1, next)));
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
+
+  const navStyle =
+    isCreativePage
+      ? { opacity, y }
+      : isHomePage
+        ? { opacity: isHovering ? 1 : homeOpacity }
+        : undefined;
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20, x: 0 }}
       animate={{ opacity: 1, y: 0, x: 0 }}
       transition={{ duration: 0.5 }}
-      style={isCreativePage ? { opacity, y } : undefined}
+      style={navStyle}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       className={`
         fixed top-0 left-0 w-full 
         md:top-20 md:left-8 md:w-40 xl:left-16 2xl:left-24
@@ -72,7 +101,7 @@ function Sidebar() {
                     ${
                       isActive
                         ? "text-accent"
-                        : "text-primary/60 hover:text-accent"
+                        : "text-foreground/60 hover:text-accent"
                     }
                   `}
                 >
