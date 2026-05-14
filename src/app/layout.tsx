@@ -114,6 +114,13 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/avatar.png" />
         <link rel="apple-touch-icon" href="/avatar.png" />
+        {/* Cloudflare Web Analytics */}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "36f5cb17deb24553b7a108978c4aa49a"}'
+        />
+        {/* End Cloudflare Web Analytics */}
       </head>
       <body className="bg-background text-foreground antialiased font-sans">
         <div className="min-h-screen">
