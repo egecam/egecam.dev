@@ -118,6 +118,7 @@ export function PdfPanel({ open, file, workTitle, onClose }: PanelProps) {
   const [content, setContent] = useState("");
   const [baseDir, setBaseDir] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [zoomed, setZoomed] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -146,7 +147,9 @@ export function PdfPanel({ open, file, workTitle, onClose }: PanelProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key !== "Escape") return;
+      if (zoomed) setZoomed(null);
+      else onClose();
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -154,7 +157,11 @@ export function PdfPanel({ open, file, workTitle, onClose }: PanelProps) {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [open, onClose]);
+  }, [open, onClose, zoomed]);
+
+  useEffect(() => {
+    if (!open) setZoomed(null);
+  }, [open]);
 
   if (!open) return null;
   return (
@@ -169,7 +176,16 @@ export function PdfPanel({ open, file, workTitle, onClose }: PanelProps) {
         </button>
       </div>
       <div className="panel-body">
-        <article className="reader">
+        <article
+          className="reader"
+          onClick={(e) => {
+            const t = e.target as HTMLElement;
+            if (t.tagName === "IMG") {
+              const img = t as HTMLImageElement;
+              setZoomed({ src: img.src, alt: img.alt || "" });
+            }
+          }}
+        >
           {loaded ? (
             <div dangerouslySetInnerHTML={{ __html: renderMarkdown(content, baseDir) }} />
           ) : (
@@ -179,6 +195,30 @@ export function PdfPanel({ open, file, workTitle, onClose }: PanelProps) {
           )}
         </article>
       </div>
+      {zoomed && (
+        <div
+          className="panel-overlay"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setZoomed(null)}
+          style={{ zIndex: 60 }}
+        >
+          <div className="panel-head" onClick={(e) => e.stopPropagation()}>
+            <div>
+              <span className="panel-title">{zoomed.alt || "Image"}</span>
+              <span style={{ marginLeft: 14 }}>· {workTitle}</span>
+            </div>
+            <button className="panel-close" onClick={() => setZoomed(null)}>
+              Close · Esc
+            </button>
+          </div>
+          <div className="panel-body" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-content">
+              <img src={zoomed.src} alt={zoomed.alt} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

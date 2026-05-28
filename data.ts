@@ -31,9 +31,9 @@ export const AUTHOR = {
 
 export const STATEMENT = `I work with data, code, digital and physical visuals, found objects and sounds, using old media and obsolete technologies.
 
-The idea I am chasing after is about us, the false nostalgia feeding our profound loneliness through obsolete media. As the sole and last of our kind, we are captives in the universe and the only friends around are the ones we moulded.
+The idea I am chasing after is about us, the false nostalgia feeding our profound loneliness through obsolete media. As the loneliest of Hominids, we are captives in the universe and the only friends around are the ones we moulded.
 
-This captivity leads me to wire components, translate and sculpt data, dig and process sounds on cassettes, create speculative artifacts to understand the haunting past of people and spaces by evoking a sense of empathy.
+This captivity leads me to wire components, translate and sculpt data, dig and process sounds through cassettes, create speculative artifacts and understand the haunting pasts of people and spaces and to evoke a sense of empathy.
 
 `;
 

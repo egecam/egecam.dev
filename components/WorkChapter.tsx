@@ -92,7 +92,11 @@ export function WorkChapter({
             return (
               <>
                 {images.length > 0 && (
-                  <div className="gallery" aria-label={`${w.title} — images`}>
+                  <div
+                    className="gallery"
+                    data-work-id={w.id}
+                    aria-label={`${w.title} — images`}
+                  >
                     {images.map((f, i) => (
                       <button
                         key={i}
