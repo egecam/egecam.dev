@@ -1,12 +1,12 @@
 {
-  "name": "digital-media-portfolio",
+  "name": "egecam-dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "next": "^15.5.18",
@@ -14,11 +14,12 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
     "@types/node": "20.12.7",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.6",
+    "eslint-config-next": "^15.5.18",
     "typescript": "5.5.4"
   }
 }

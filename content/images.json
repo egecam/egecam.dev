@@ -1,0 +1,38 @@
+{
+  "nuremberg-now": {
+    "src": "/plates/nuremberg-now.png",
+    "caption": "Nürnberg — Schedel, Liber Chronicarum, 1493",
+    "placeholder": "Nürnberg — public-domain plate"
+  },
+  "istanbul": {
+    "src": "/plates/istanbul.png",
+    "caption": "Constantinopel — Schedel, Liber Chronicarum, 1493",
+    "placeholder": "Istanbul — public-domain plate"
+  },
+  "record-sleeve": {
+    "src": "/plates/record-sleeve.jpeg",
+    "caption": "Yabancı, single, 2026",
+    "tip": "Yabancı, single, 2026",
+    "placeholder": "Yabancı"
+  },
+  "record-disc": {
+    "src": "/plates/record-disc.png",
+    "tip": "Yabancı, single, 2026",
+    "placeholder": "Yabancı, single, 2026"
+  },
+  "book-cover": {
+    "src": "/plates/book-cover.jpg",
+    "caption": "Rick Rubin, The Creative Act, 2023",
+    "placeholder": "the book"
+  },
+  "book-inside": {
+    "src": "/plates/book-inside.jpeg",
+    "tip": "The Creative Act — a page",
+    "placeholder": "a page"
+  },
+  "schedel-1493": {
+    "src": "/plates/schedel-1493.png",
+    "caption": "Schedel, Liber Chronicarum, 1493 — Nürnberg",
+    "placeholder": "Plate — Schedel, 1493"
+  }
+}
