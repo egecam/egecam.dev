@@ -1,4 +1,4 @@
----
+<!-- ---
 title: Yabancılaşma ve şehir
 lang: tr
 topics: [socio-cultural]
@@ -14,3 +14,4 @@ Bir şehre yabancı olmak, orada tanıdık kimsenin bulunmaması değildir. Şeh
 :plate[schedel-1493] Gravürdeki şehir, surlarıyla ve kuleleriyle bir iddia olarak duruyor: burası şudur, sınırları buradan geçer. Kayıt tutmanın kendisi bir yerleşme biçimidir. Bir şehri çizmek, onu yaşanabilir kılmaktan önce okunabilir kılar; haritaya giren şey kalır, girmeyen şey ancak hatırlandığı sürece vardır. Yabancının avantajı budur: neyin çizildiğini, neyin çizim dışında bırakıldığını aynı anda görebilir.
 
 Veri de aynı mesafeyi kurar. Bir şehri sayılarla anlatmak, onu bir yabancının gözüyle görmeye zorlar: ortalamalar, dağılımlar, eşikler. Kaybedilen şey doku, kazanılan şey karşılaştırmadır. Bu yazı dizisinin sorusu bu iki bakışın nasıl aynı sayfada tutulabileceğidir.
+ -->

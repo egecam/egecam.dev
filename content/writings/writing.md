@@ -1,8 +1,8 @@
 ---
-title: Taslak
+title: Audio Harvesting
 lang: tr
-topics: [socio-cultural]
-date: 2026-03-18
+topics: [music]
+date: 2026-10
 place: Nürnberg
 placeNote: Written in Nürnberg, Bavaria
 ---
